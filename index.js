@@ -34,19 +34,22 @@ async function getPlayerRank(userId) {
 // 📌 Change Player Rank
 async function setPlayerRank(userId, newRankId) {
     try {
-        // Step 1: Get CSRF token (first request will fail but return a token)
-        let csrfToken = "";
-        try {
-            await axios.post("https://auth.roblox.com/v2/login", {}, {
-                headers: { Cookie: `.ROBLOSECURITY=${ROBLOX_COOKIE}` }
-            });
-        } catch (csrfError) {
-            if (csrfError.response && csrfError.response.headers["x-csrf-token"]) {
-                csrfToken = csrfError.response.headers["x-csrf-token"];
-            } else {
-                console.error("Failed to retrieve CSRF token:", csrfError.message);
-                return false;
+        // Step 1: Get CSRF token
+        const tokenResponse = await axios.post(
+            "https://auth.roblox.com/v2/logout",
+            {},
+            {
+                headers: { Cookie: `.ROBLOSECURITY=${ROBLOX_COOKIE}` },
+                validateStatus: function (status) {
+                    return status === 403; // Expecting 403 response with token
+                }
             }
+        );
+        
+        const csrfToken = tokenResponse.headers["x-csrf-token"];
+        if (!csrfToken) {
+            console.error("Failed to retrieve CSRF token");
+            return false;
         }
 
         // Step 2: Send the actual request with the retrieved CSRF token
