@@ -1,11 +1,12 @@
 const express = require("express");
 const axios = require("axios");
+const roblox = require("noblox.js")
 
 const app = express();
 app.use(express.json());
 
 const GROUP_ID = 5308358; // 🔹 Your Roblox Group ID
-const ROBLOX_COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_B47D2AE5BBB21D174A5B1C23B81FB4974ACA75F2790FE882542DE522E90A3DCB22DA639132CE849213BDE0D8E91242EF71AA584BF7189A83A2C040C66D489A4B4C48E000865523E76B2E0E3450078728B0F661EA3DD2378DFF23E6A9B85DEF8AE7FCA2095B3D02FB3A8811A30E091F245C139E5E4C5C8822BE6F9A2FE4EDF176A5FD95AEDD4B3EEDC94722217A32C50561C5C8D2067B010ED12F0D9FB5EF811E3BDCFDA23AAE920B3243CB03C0B60CA2838BE705459415B19ADBD341E2B1315C6DC061DBB513478F51B510CE369B09D67CFA1C238ACF854A002689DE2D7E1D30D951E1D78146A7D60020F1C910A841DB75C53272DA3423964D4AC0A745CAA3F7E39DD0B143CDA7EE1AE7C1D2EEBB4E4ECE32ACB9CDE5DE78A155E912203981D0323DAE59BA1C6BF1D979B79EFA9CBE79D5547F73E2DF8040E4175B6F11F4F6EBAD46C9DAB0BAC8884FEE3ED40AB4BB41CCA388EE5FE97639990D7977DBEDC56951F5007551A29BBC5B3EDC6F34487D1460FC69B2D4A1B68A0D22C973F18E30E089378A4A6ED7251D0FD204892F9B7AB3C16595D843F6DBB2CE64DC64AA0DBECF4377C3214136FC9C1ABEAFF93F22CB49DA17296907DAA48D6D49C2AEDADE02365011F1A985D64D4D8F761D73FD36DF4B634907FCE187DF47FE1CC455E34318757A12F73D4C8963A3AD4BC80ACC0613BABEF55ECC342A37D8E2CE9C63FBBB8BA38A43C69E42ADCE8FB72358602CAE47272528B89C1B40593E6290FD236E3DFA586ED89EC72F501E4DEE0A247FD60C24DE4A5A7D324A9E10A993003467B6D48DDD0052310031E45A8AC5A86FB0C786D45DF217D396BBB51E9600945B8471457332946BD61B5FD60D7884175E9C23705849C73A5674D94BE549A44D49ECBAA9552EE36C41146DD77890F4E98136DDE7486BA844A19E2C973A94C4816E4F4959629E833AC9DC6CFFD270B3D73DF682DFDD426A60740756774DAD3F2230FD506E8B68769936F43BFAA1E85AEAB722E305FCFAACC494FE30DF5774EC74C4A4F845729517A6098844EA1F03937D854DF629012F724F68C45F368343A8DB282FF9041AE9CD94A9C54A0F701A9BDFCC2595807937EC7209211B65138664167F4604D3A72D4CC323EC5F2A9BC76EDA16265EB718ADDB0B3413"; // 🔥 Use an alt account!
+const ROBLOX_COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_D24AE2371ED31CD5828AB20D2BC6467D75CFBD9A408557E27D56E05315E6B77CDC8948236FDAEDBDB6234B292BB6744E1DDAD74D476FFFBA97B46729CC261B7361A13C8D0687EE6148FB32CFFE5FC169E6C7F2EBABFB214C54BC7B6FDB37F1BBC6577263241CAE41FCB705DAFC537BDDB9EC554E4B35C733B96F2A6E7306D0F75F02EC32B2D29859E0A40AE295DE5AA17B522C083DFF08BB3C7F12A74BD001D49D8421DEA91978A8285F5C1A9CC0A271935B0D3D0978927D7F8B953F371C8FA6FFD25089ACA221DEBC4472AA7D7B25CBFC3A77E7D64B1F0A9E8FAB56D4FB34A36CBE3AB9945CBE46ADBCA6CC75E8DE0D1FFAD2CD4D35801DF28281A8B603753EF8C8972A7B02FC8948C55F69A877A80DD3C705E62EE3DC965A27179E3106239863729FAFE1CE9B68DEE6E7A08AEFF2CF5CC4D9ABF345E49D76B208332239EF3C17135E3E96DE8E01190FEEB55D991F7DC8262EB28D9A4A85586504B361DCD4993895C1FD10B5B3703795603D941C4235F9308EE8B31E8D99F4EEFEDCA20FA53BF32E813F2CAEF6DFE6AF8A65F76C598470DB05809AAD294298DAE9CAA20115A346EBEDCE9AC8481A18CFBF9357F1BD6907CC33041FCBAFCBAD6814E0B1AD9EA33D9F2ABD4C55B2BAE8E434FB3AF6A88789BD6D005DDC658B9F3D510E184DAB1DD0405E8C18A527A8424FBF076F31012F4840C28D3CDB8CC3E18D81810F370CD7AC9C28BCEE41FFC91DCC1B92F94B45DD65A39DD745FC021C7322A5AE8307B71F0B65044A45D4CE0B9C0675B5650C90CB6794E6B2C444179ADA3EACF53A6D74D81E9082928DCEEC6EE1772425D4E7EAAAF14E7482D9BD51893069C262A2627631D550F0C8AD51DB27E85AF7E14632C21CE9A134E7BB2D001E947244DB454416E23FECB6F186CBB4BF5E51638CB1B812DCA6128DEC42EB45D16D2588AE18D296BE552AA4B21F4BBAD012595251821DA6BC7D12933E19A344172408F2F0FD2E36AE92FF7BA6AC8AB514F5BC358ECD62D52917914D8ABE9165A09CC25F61C67D5552DF2512DF229177807609A598A65D2157D6F55EB11A5404258354EB286CC9AE2CACEC6886ABB17CA04A101D2289B09173F170DD9E5713522BB00E13B82952E146B8F80F4E0C4DBAB7342C2FD359353B0E5BD8A270"; // 🔥 Use an alt account!
 
 console.log("starting this")
 const ROLES = {
@@ -14,6 +15,8 @@ const ROLES = {
     "Developer": 15,
     "Admin": 254,
 };
+
+roblox.setCookie(ROBLOX_COOKIE).then(() => console.log('Logged into Roblox.')).catch(console.error);
 
 // 📌 Get Player's Current Rank
 async function getPlayerRank(userId) {
@@ -32,46 +35,54 @@ async function getPlayerRank(userId) {
 }
 
 // 📌 Change Player Rank
-async function setPlayerRank(userId, newRankId) {
+async function getCSRFToken() {
     try {
-        // Step 1: Get CSRF token
-        const tokenResponse = await axios.post(
-            "https://auth.roblox.com/v2/logout",
+        const response = await axios.post(
+            "https://auth.roblox.com/v2/login",
             {},
             {
-                headers: { Cookie: `.ROBLOSECURITY=${ROBLOX_COOKIE}` },
-                validateStatus: function (status) {
-                    return status === 403; // Expecting 403 response with token
+                headers: {
+                    Cookie: `.ROBLOSECURITY=${ROBLOX_COOKIE}`
                 }
             }
         );
-        
-        const csrfToken = tokenResponse.headers["x-csrf-token"];
-        if (!csrfToken) {
-            console.error("Failed to retrieve CSRF token");
-            return false;
+    } catch (error) {
+        if (error.response && error.response.headers["x-csrf-token"]) {
+            const csrfToken = error.response.headers["x-csrf-token"];
+            console.log("✅ CSRF Token Retrieved:", csrfToken);  // Log CSRF token
+            return csrfToken;
+        } else {
+            console.error("❌ Failed to get CSRF token:", error.response?.data || error.message);
         }
+    }
+    throw new Error("CSRF token retrieval failed");
+}
 
-        // Step 2: Send the actual request with the retrieved CSRF token
-        await axios.patch(
+async function setPlayerRank(userId, newRankId) {
+    try {
+        // Step 1: Retrieve CSRF token
+        const csrfToken = await getCSRFToken();
+
+        // Step 2: Attempt rank change
+        const response = await axios.patch(
             `https://groups.roblox.com/v1/groups/${GROUP_ID}/users/${userId}`,
             { role: newRankId },
             {
                 headers: {
-                    "x-csrf-token": csrfToken, // Use the retrieved CSRF token
+                    "x-csrf-token": csrfToken,
+                    "Content-Type": "application/json",
                     Cookie: `.ROBLOSECURITY=${ROBLOX_COOKIE}`
-                },
+                }
             }
         );
 
-        console.log(`Successfully set rank for user ${userId} to ${newRankId}`);
+        console.log(`✅ Successfully promoted user ${userId} to rank ${newRankId}`);
         return true;
     } catch (err) {
-        console.error("Error setting rank:", err.response?.data || err.message);
+        console.error("❌ Error setting rank:", err.response?.data || err.message);
         return false;
     }
 }
-
 // 📌 Promote Player
 app.post("/promote", async (req, res) => {
     const { userId } = req.body;
@@ -90,10 +101,11 @@ app.post("/promote", async (req, res) => {
     let newRoleName = roleNames[currentIndex + 1];
     let newRankId = ROLES[newRoleName];*/
 
-    if (await setPlayerRank(userId, 15)) {
-        return res.json({ success: true, newRole: newRoleName });
-    } else {
-        return res.status(500).json({ error: "Failed to promote" });
+    try {
+        await roblox.setRank(Number(GROUP_ID), Number(userId), Number(15));
+        res.send({ success: true, message: 'Rank updated.' });
+    } catch (error) {
+        res.status(500).send({ success: false, error: error.message });
     }
 });
 
