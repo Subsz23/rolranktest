@@ -85,51 +85,15 @@ async function setPlayerRank(userId, newRankId) {
 }
 // 📌 Promote Player
 app.post("/promote", async (req, res) => {
-    const { userId } = req.body;
+    const { userId, rankId } = req.body;
     console.log(userId)
     if (!userId) return res.status(400).json({ error: "User ID required" });
 
-   /* let currentRankId = await getPlayerRank(userId);
-    if (!currentRankId) return res.status(400).json({ error: "Player not found in group" });
-
-    let roleNames = Object.keys(ROLES);
-    let currentIndex = roleNames.findIndex(name => ROLES[name] === currentRankId);
-
-    if (currentIndex === -1 || currentIndex >= roleNames.length - 1)
-        return res.status(400).json({ error: "Cannot promote further" });
-
-    let newRoleName = roleNames[currentIndex + 1];
-    let newRankId = ROLES[newRoleName];*/
-
     try {
-        await roblox.setRank(Number(GROUP_ID), Number(userId), Number(15));
+        await roblox.setRank(Number(GROUP_ID), Number(userId), Number(rankId));
         res.send({ success: true, message: 'Rank updated.' });
     } catch (error) {
         res.status(500).send({ success: false, error: error.message });
-    }
-});
-
-// 📌 Demote Player
-app.post("/demote", async (req, res) => {
-    const { userId } = req.body;
-    if (!userId) return res.status(400).json({ error: "User ID required" });
-
-    let currentRankId = await getPlayerRank(userId);
-    if (!currentRankId) return res.status(400).json({ error: "Player not found in group" });
-
-    let roleNames = Object.keys(ROLES);
-    let currentIndex = roleNames.findIndex(name => ROLES[name] === currentRankId);
-
-    if (currentIndex <= 0)
-        return res.status(400).json({ error: "Cannot demote further" });
-
-    let newRoleName = roleNames[currentIndex - 1];
-    let newRankId = ROLES[newRoleName];
-
-    if (await setPlayerRank(userId, newRankId)) {
-        return res.json({ success: true, newRole: newRoleName });
-    } else {
-        return res.status(500).json({ error: "Failed to demote" });
     }
 });
 
