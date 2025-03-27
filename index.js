@@ -8,7 +8,6 @@ app.use(express.json());
 const GROUP_ID = 5308358; // 🔹 Your Roblox Group ID
 const ROBLOX_COOKIE = process.env.ROBLOX_COOKIE; // Stored securely in Replit Secrets
 
-console.log("starting this")
 const ROLES = {
     "Guest": 0,        // 🔹 Example Role IDs (Replace with real ones)
     "Member": 1,
@@ -86,7 +85,7 @@ async function setPlayerRank(userId, newRankId) {
 // 📌 Promote Player
 app.post("/promote", async (req, res) => {
     const { userId, rankId } = req.body;
-    console.log(userId)
+    console.log(userId,rankId)
     if (!userId) return res.status(400).json({ error: "User ID required" });
 
     try {
