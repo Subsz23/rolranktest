@@ -6,7 +6,7 @@ app.use(express.json());
 
 const GROUP_ID = 5308358; // Your Roblox Group ID
 const ROBLOX_COOKIE = process.env.ROBLOX_COOKIE; // Ensure this is set in your environment
-
+console.log("running")
 // Log into Roblox with the provided cookie
 roblox.setCookie(ROBLOX_COOKIE)
     .then(() => console.log('✅ Logged into Roblox.'))
